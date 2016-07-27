@@ -1,0 +1,507 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.online.mapper.DiapersMapper" >
+  <resultMap id="BaseResultMap" type="com.online.model.Diapers" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="title_des" property="titleDes" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="commodity_id" property="commodityId" jdbcType="INTEGER" />
+    <result column="price" property="price" jdbcType="DECIMAL" />
+    <result column="weight" property="weight" jdbcType="DOUBLE" />
+    <result column="size" property="size" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="Ischina" property="ischina" jdbcType="INTEGER" />
+    <result column="age" property="age" jdbcType="VARCHAR" />
+    <result column="packaging_unit" property="packagingUnit" jdbcType="VARCHAR" />
+    <result column="catalog" property="catalog" jdbcType="INTEGER" />
+    <result column="comment_num" property="commentNum" jdbcType="VARCHAR" />
+    <result column="prise_percentage" property="prisePercentage" jdbcType="VARCHAR" />
+    <result column="middle_percentage" property="middlePercentage" jdbcType="VARCHAR" />
+    <result column="bad_percentage" property="badPercentage" jdbcType="VARCHAR" />
+    <result column="image_path" property="imagePath" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.online.model.Diapers" extends="BaseResultMap" >
+    <result column="impression" property="impression" jdbcType="LONGVARBINARY" />
+  </resultMap>
+  <sql id="Condition_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Condition_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, title_des, name, commodity_id, price, weight, size, sex, address, Ischina, age, 
+    packaging_unit, catalog, comment_num, prise_percentage, middle_percentage, bad_percentage, 
+    image_path
+  </sql>
+  <sql id="Blob_Column_List" >
+    impression
+  </sql>
+  <select id="selectByConditionWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.online.model.DiapersCondition" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from diapers
+    <if test="_parameter != null" >
+      <include refid="Condition_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitOffset >= 0" >
+       limit ${limitOffset} , ${limitSize}
+    </if>
+  </select>
+  <select id="selectByCondition" resultMap="BaseResultMap" parameterType="com.online.model.DiapersCondition" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from diapers
+    <if test="_parameter != null" >
+      <include refid="Condition_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitOffset >= 0" >
+       limit ${limitOffset} , ${limitSize}
+    </if>
+  </select>
+  <select id="selectById" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from diapers
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteById" parameterType="java.lang.Long" >
+    delete from diapers
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByCondition" parameterType="com.online.model.DiapersCondition" >
+    delete from diapers
+    <if test="_parameter != null" >
+      <include refid="Condition_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.online.model.Diapers" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into diapers (title_des, name, commodity_id, 
+      price, weight, size, 
+      sex, address, Ischina, 
+      age, packaging_unit, catalog, 
+      comment_num, prise_percentage, middle_percentage, 
+      bad_percentage, image_path, impression
+      )
+    values (#{titleDes,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{commodityId,jdbcType=INTEGER}, 
+      #{price,jdbcType=DECIMAL}, #{weight,jdbcType=DOUBLE}, #{size,jdbcType=VARCHAR}, 
+      #{sex,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{ischina,jdbcType=INTEGER}, 
+      #{age,jdbcType=VARCHAR}, #{packagingUnit,jdbcType=VARCHAR}, #{catalog,jdbcType=INTEGER}, 
+      #{commentNum,jdbcType=VARCHAR}, #{prisePercentage,jdbcType=VARCHAR}, #{middlePercentage,jdbcType=VARCHAR}, 
+      #{badPercentage,jdbcType=VARCHAR}, #{imagePath,jdbcType=VARCHAR}, #{impression,jdbcType=LONGVARBINARY}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.online.model.Diapers" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into diapers
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="titleDes != null" >
+        title_des,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="commodityId != null" >
+        commodity_id,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="weight != null" >
+        weight,
+      </if>
+      <if test="size != null" >
+        size,
+      </if>
+      <if test="sex != null" >
+        sex,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="ischina != null" >
+        Ischina,
+      </if>
+      <if test="age != null" >
+        age,
+      </if>
+      <if test="packagingUnit != null" >
+        packaging_unit,
+      </if>
+      <if test="catalog != null" >
+        catalog,
+      </if>
+      <if test="commentNum != null" >
+        comment_num,
+      </if>
+      <if test="prisePercentage != null" >
+        prise_percentage,
+      </if>
+      <if test="middlePercentage != null" >
+        middle_percentage,
+      </if>
+      <if test="badPercentage != null" >
+        bad_percentage,
+      </if>
+      <if test="imagePath != null" >
+        image_path,
+      </if>
+      <if test="impression != null" >
+        impression,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="titleDes != null" >
+        #{titleDes,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityId != null" >
+        #{commodityId,jdbcType=INTEGER},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="weight != null" >
+        #{weight,jdbcType=DOUBLE},
+      </if>
+      <if test="size != null" >
+        #{size,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="ischina != null" >
+        #{ischina,jdbcType=INTEGER},
+      </if>
+      <if test="age != null" >
+        #{age,jdbcType=VARCHAR},
+      </if>
+      <if test="packagingUnit != null" >
+        #{packagingUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="catalog != null" >
+        #{catalog,jdbcType=INTEGER},
+      </if>
+      <if test="commentNum != null" >
+        #{commentNum,jdbcType=VARCHAR},
+      </if>
+      <if test="prisePercentage != null" >
+        #{prisePercentage,jdbcType=VARCHAR},
+      </if>
+      <if test="middlePercentage != null" >
+        #{middlePercentage,jdbcType=VARCHAR},
+      </if>
+      <if test="badPercentage != null" >
+        #{badPercentage,jdbcType=VARCHAR},
+      </if>
+      <if test="imagePath != null" >
+        #{imagePath,jdbcType=VARCHAR},
+      </if>
+      <if test="impression != null" >
+        #{impression,jdbcType=LONGVARBINARY},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByCondition" parameterType="com.online.model.DiapersCondition" resultType="java.lang.Integer" >
+    select count(*) from diapers
+    <if test="_parameter != null" >
+      <include refid="Condition_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByConditionSelective" parameterType="map" >
+    update diapers
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.titleDes != null" >
+        title_des = #{record.titleDes,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.commodityId != null" >
+        commodity_id = #{record.commodityId,jdbcType=INTEGER},
+      </if>
+      <if test="record.price != null" >
+        price = #{record.price,jdbcType=DECIMAL},
+      </if>
+      <if test="record.weight != null" >
+        weight = #{record.weight,jdbcType=DOUBLE},
+      </if>
+      <if test="record.size != null" >
+        size = #{record.size,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sex != null" >
+        sex = #{record.sex,jdbcType=VARCHAR},
+      </if>
+      <if test="record.address != null" >
+        address = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ischina != null" >
+        Ischina = #{record.ischina,jdbcType=INTEGER},
+      </if>
+      <if test="record.age != null" >
+        age = #{record.age,jdbcType=VARCHAR},
+      </if>
+      <if test="record.packagingUnit != null" >
+        packaging_unit = #{record.packagingUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.catalog != null" >
+        catalog = #{record.catalog,jdbcType=INTEGER},
+      </if>
+      <if test="record.commentNum != null" >
+        comment_num = #{record.commentNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prisePercentage != null" >
+        prise_percentage = #{record.prisePercentage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.middlePercentage != null" >
+        middle_percentage = #{record.middlePercentage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.badPercentage != null" >
+        bad_percentage = #{record.badPercentage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.imagePath != null" >
+        image_path = #{record.imagePath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.impression != null" >
+        impression = #{record.impression,jdbcType=LONGVARBINARY},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Condition_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByConditionWithBLOBs" parameterType="map" >
+    update diapers
+    set id = #{record.id,jdbcType=BIGINT},
+      title_des = #{record.titleDes,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      commodity_id = #{record.commodityId,jdbcType=INTEGER},
+      price = #{record.price,jdbcType=DECIMAL},
+      weight = #{record.weight,jdbcType=DOUBLE},
+      size = #{record.size,jdbcType=VARCHAR},
+      sex = #{record.sex,jdbcType=VARCHAR},
+      address = #{record.address,jdbcType=VARCHAR},
+      Ischina = #{record.ischina,jdbcType=INTEGER},
+      age = #{record.age,jdbcType=VARCHAR},
+      packaging_unit = #{record.packagingUnit,jdbcType=VARCHAR},
+      catalog = #{record.catalog,jdbcType=INTEGER},
+      comment_num = #{record.commentNum,jdbcType=VARCHAR},
+      prise_percentage = #{record.prisePercentage,jdbcType=VARCHAR},
+      middle_percentage = #{record.middlePercentage,jdbcType=VARCHAR},
+      bad_percentage = #{record.badPercentage,jdbcType=VARCHAR},
+      image_path = #{record.imagePath,jdbcType=VARCHAR},
+      impression = #{record.impression,jdbcType=LONGVARBINARY}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Condition_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByCondition" parameterType="map" >
+    update diapers
+    set id = #{record.id,jdbcType=BIGINT},
+      title_des = #{record.titleDes,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      commodity_id = #{record.commodityId,jdbcType=INTEGER},
+      price = #{record.price,jdbcType=DECIMAL},
+      weight = #{record.weight,jdbcType=DOUBLE},
+      size = #{record.size,jdbcType=VARCHAR},
+      sex = #{record.sex,jdbcType=VARCHAR},
+      address = #{record.address,jdbcType=VARCHAR},
+      Ischina = #{record.ischina,jdbcType=INTEGER},
+      age = #{record.age,jdbcType=VARCHAR},
+      packaging_unit = #{record.packagingUnit,jdbcType=VARCHAR},
+      catalog = #{record.catalog,jdbcType=INTEGER},
+      comment_num = #{record.commentNum,jdbcType=VARCHAR},
+      prise_percentage = #{record.prisePercentage,jdbcType=VARCHAR},
+      middle_percentage = #{record.middlePercentage,jdbcType=VARCHAR},
+      bad_percentage = #{record.badPercentage,jdbcType=VARCHAR},
+      image_path = #{record.imagePath,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Condition_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByIdSelective" parameterType="com.online.model.Diapers" >
+    update diapers
+    <set >
+      <if test="titleDes != null" >
+        title_des = #{titleDes,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityId != null" >
+        commodity_id = #{commodityId,jdbcType=INTEGER},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="weight != null" >
+        weight = #{weight,jdbcType=DOUBLE},
+      </if>
+      <if test="size != null" >
+        size = #{size,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="ischina != null" >
+        Ischina = #{ischina,jdbcType=INTEGER},
+      </if>
+      <if test="age != null" >
+        age = #{age,jdbcType=VARCHAR},
+      </if>
+      <if test="packagingUnit != null" >
+        packaging_unit = #{packagingUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="catalog != null" >
+        catalog = #{catalog,jdbcType=INTEGER},
+      </if>
+      <if test="commentNum != null" >
+        comment_num = #{commentNum,jdbcType=VARCHAR},
+      </if>
+      <if test="prisePercentage != null" >
+        prise_percentage = #{prisePercentage,jdbcType=VARCHAR},
+      </if>
+      <if test="middlePercentage != null" >
+        middle_percentage = #{middlePercentage,jdbcType=VARCHAR},
+      </if>
+      <if test="badPercentage != null" >
+        bad_percentage = #{badPercentage,jdbcType=VARCHAR},
+      </if>
+      <if test="imagePath != null" >
+        image_path = #{imagePath,jdbcType=VARCHAR},
+      </if>
+      <if test="impression != null" >
+        impression = #{impression,jdbcType=LONGVARBINARY},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByIdWithBLOBs" parameterType="com.online.model.Diapers" >
+    update diapers
+    set title_des = #{titleDes,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      commodity_id = #{commodityId,jdbcType=INTEGER},
+      price = #{price,jdbcType=DECIMAL},
+      weight = #{weight,jdbcType=DOUBLE},
+      size = #{size,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      Ischina = #{ischina,jdbcType=INTEGER},
+      age = #{age,jdbcType=VARCHAR},
+      packaging_unit = #{packagingUnit,jdbcType=VARCHAR},
+      catalog = #{catalog,jdbcType=INTEGER},
+      comment_num = #{commentNum,jdbcType=VARCHAR},
+      prise_percentage = #{prisePercentage,jdbcType=VARCHAR},
+      middle_percentage = #{middlePercentage,jdbcType=VARCHAR},
+      bad_percentage = #{badPercentage,jdbcType=VARCHAR},
+      image_path = #{imagePath,jdbcType=VARCHAR},
+      impression = #{impression,jdbcType=LONGVARBINARY}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateById" parameterType="com.online.model.Diapers" >
+    update diapers
+    set title_des = #{titleDes,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      commodity_id = #{commodityId,jdbcType=INTEGER},
+      price = #{price,jdbcType=DECIMAL},
+      weight = #{weight,jdbcType=DOUBLE},
+      size = #{size,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      Ischina = #{ischina,jdbcType=INTEGER},
+      age = #{age,jdbcType=VARCHAR},
+      packaging_unit = #{packagingUnit,jdbcType=VARCHAR},
+      catalog = #{catalog,jdbcType=INTEGER},
+      comment_num = #{commentNum,jdbcType=VARCHAR},
+      prise_percentage = #{prisePercentage,jdbcType=VARCHAR},
+      middle_percentage = #{middlePercentage,jdbcType=VARCHAR},
+      bad_percentage = #{badPercentage,jdbcType=VARCHAR},
+      image_path = #{imagePath,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,541 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.online.mapper.MilkMapper" >
+  <resultMap id="BaseResultMap" type="com.online.model.Milk" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="title_des" property="titleDes" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="commodity_id" property="commodityId" jdbcType="INTEGER" />
+    <result column="price" property="price" jdbcType="DECIMAL" />
+    <result column="weight" property="weight" jdbcType="DOUBLE" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="milk_addr" property="milkAddr" jdbcType="VARCHAR" />
+    <result column="Ischina" property="ischina" jdbcType="INTEGER" />
+    <result column="age" property="age" jdbcType="VARCHAR" />
+    <result column="packaging_unit" property="packagingUnit" jdbcType="VARCHAR" />
+    <result column="formula" property="formula" jdbcType="VARCHAR" />
+    <result column="catalog" property="catalog" jdbcType="INTEGER" />
+    <result column="net_content" property="netContent" jdbcType="VARCHAR" />
+    <result column="milk_section" property="milkSection" jdbcType="INTEGER" />
+    <result column="comment_num" property="commentNum" jdbcType="VARCHAR" />
+    <result column="prise_percentage" property="prisePercentage" jdbcType="VARCHAR" />
+    <result column="middle_percentage" property="middlePercentage" jdbcType="VARCHAR" />
+    <result column="bad_percentage" property="badPercentage" jdbcType="VARCHAR" />
+    <result column="image_path" property="imagePath" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.online.model.Milk" extends="BaseResultMap" >
+    <result column="impression" property="impression" jdbcType="LONGVARBINARY" />
+  </resultMap>
+  <sql id="Condition_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Condition_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, title_des, name, commodity_id, price, weight, address, milk_addr, Ischina, age, 
+    packaging_unit, formula, catalog, net_content, milk_section, comment_num, prise_percentage, 
+    middle_percentage, bad_percentage, image_path
+  </sql>
+  <sql id="Blob_Column_List" >
+    impression
+  </sql>
+  <select id="selectByConditionWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.online.model.MilkCondition" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from milk
+    <if test="_parameter != null" >
+      <include refid="Condition_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitOffset >= 0" >
+       limit ${limitOffset} , ${limitSize}
+    </if>
+  </select>
+  <select id="selectByCondition" resultMap="BaseResultMap" parameterType="com.online.model.MilkCondition" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from milk
+    <if test="_parameter != null" >
+      <include refid="Condition_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitOffset >= 0" >
+       limit ${limitOffset} , ${limitSize}
+    </if>
+  </select>
+  <select id="selectById" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from milk
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteById" parameterType="java.lang.Long" >
+    delete from milk
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByCondition" parameterType="com.online.model.MilkCondition" >
+    delete from milk
+    <if test="_parameter != null" >
+      <include refid="Condition_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.online.model.Milk" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into milk (title_des, name, commodity_id, 
+      price, weight, address, 
+      milk_addr, Ischina, age, 
+      packaging_unit, formula, catalog, 
+      net_content, milk_section, comment_num, 
+      prise_percentage, middle_percentage, bad_percentage, 
+      image_path, impression)
+    values (#{titleDes,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{commodityId,jdbcType=INTEGER}, 
+      #{price,jdbcType=DECIMAL}, #{weight,jdbcType=DOUBLE}, #{address,jdbcType=VARCHAR}, 
+      #{milkAddr,jdbcType=VARCHAR}, #{ischina,jdbcType=INTEGER}, #{age,jdbcType=VARCHAR}, 
+      #{packagingUnit,jdbcType=VARCHAR}, #{formula,jdbcType=VARCHAR}, #{catalog,jdbcType=INTEGER}, 
+      #{netContent,jdbcType=VARCHAR}, #{milkSection,jdbcType=INTEGER}, #{commentNum,jdbcType=VARCHAR}, 
+      #{prisePercentage,jdbcType=VARCHAR}, #{middlePercentage,jdbcType=VARCHAR}, #{badPercentage,jdbcType=VARCHAR}, 
+      #{imagePath,jdbcType=VARCHAR}, #{impression,jdbcType=LONGVARBINARY})
+  </insert>
+  <insert id="insertSelective" parameterType="com.online.model.Milk" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into milk
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="titleDes != null" >
+        title_des,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="commodityId != null" >
+        commodity_id,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="weight != null" >
+        weight,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="milkAddr != null" >
+        milk_addr,
+      </if>
+      <if test="ischina != null" >
+        Ischina,
+      </if>
+      <if test="age != null" >
+        age,
+      </if>
+      <if test="packagingUnit != null" >
+        packaging_unit,
+      </if>
+      <if test="formula != null" >
+        formula,
+      </if>
+      <if test="catalog != null" >
+        catalog,
+      </if>
+      <if test="netContent != null" >
+        net_content,
+      </if>
+      <if test="milkSection != null" >
+        milk_section,
+      </if>
+      <if test="commentNum != null" >
+        comment_num,
+      </if>
+      <if test="prisePercentage != null" >
+        prise_percentage,
+      </if>
+      <if test="middlePercentage != null" >
+        middle_percentage,
+      </if>
+      <if test="badPercentage != null" >
+        bad_percentage,
+      </if>
+      <if test="imagePath != null" >
+        image_path,
+      </if>
+      <if test="impression != null" >
+        impression,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="titleDes != null" >
+        #{titleDes,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityId != null" >
+        #{commodityId,jdbcType=INTEGER},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="weight != null" >
+        #{weight,jdbcType=DOUBLE},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="milkAddr != null" >
+        #{milkAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="ischina != null" >
+        #{ischina,jdbcType=INTEGER},
+      </if>
+      <if test="age != null" >
+        #{age,jdbcType=VARCHAR},
+      </if>
+      <if test="packagingUnit != null" >
+        #{packagingUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="formula != null" >
+        #{formula,jdbcType=VARCHAR},
+      </if>
+      <if test="catalog != null" >
+        #{catalog,jdbcType=INTEGER},
+      </if>
+      <if test="netContent != null" >
+        #{netContent,jdbcType=VARCHAR},
+      </if>
+      <if test="milkSection != null" >
+        #{milkSection,jdbcType=INTEGER},
+      </if>
+      <if test="commentNum != null" >
+        #{commentNum,jdbcType=VARCHAR},
+      </if>
+      <if test="prisePercentage != null" >
+        #{prisePercentage,jdbcType=VARCHAR},
+      </if>
+      <if test="middlePercentage != null" >
+        #{middlePercentage,jdbcType=VARCHAR},
+      </if>
+      <if test="badPercentage != null" >
+        #{badPercentage,jdbcType=VARCHAR},
+      </if>
+      <if test="imagePath != null" >
+        #{imagePath,jdbcType=VARCHAR},
+      </if>
+      <if test="impression != null" >
+        #{impression,jdbcType=LONGVARBINARY},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByCondition" parameterType="com.online.model.MilkCondition" resultType="java.lang.Integer" >
+    select count(*) from milk
+    <if test="_parameter != null" >
+      <include refid="Condition_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByConditionSelective" parameterType="map" >
+    update milk
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.titleDes != null" >
+        title_des = #{record.titleDes,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.commodityId != null" >
+        commodity_id = #{record.commodityId,jdbcType=INTEGER},
+      </if>
+      <if test="record.price != null" >
+        price = #{record.price,jdbcType=DECIMAL},
+      </if>
+      <if test="record.weight != null" >
+        weight = #{record.weight,jdbcType=DOUBLE},
+      </if>
+      <if test="record.address != null" >
+        address = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.milkAddr != null" >
+        milk_addr = #{record.milkAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ischina != null" >
+        Ischina = #{record.ischina,jdbcType=INTEGER},
+      </if>
+      <if test="record.age != null" >
+        age = #{record.age,jdbcType=VARCHAR},
+      </if>
+      <if test="record.packagingUnit != null" >
+        packaging_unit = #{record.packagingUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.formula != null" >
+        formula = #{record.formula,jdbcType=VARCHAR},
+      </if>
+      <if test="record.catalog != null" >
+        catalog = #{record.catalog,jdbcType=INTEGER},
+      </if>
+      <if test="record.netContent != null" >
+        net_content = #{record.netContent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.milkSection != null" >
+        milk_section = #{record.milkSection,jdbcType=INTEGER},
+      </if>
+      <if test="record.commentNum != null" >
+        comment_num = #{record.commentNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prisePercentage != null" >
+        prise_percentage = #{record.prisePercentage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.middlePercentage != null" >
+        middle_percentage = #{record.middlePercentage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.badPercentage != null" >
+        bad_percentage = #{record.badPercentage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.imagePath != null" >
+        image_path = #{record.imagePath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.impression != null" >
+        impression = #{record.impression,jdbcType=LONGVARBINARY},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Condition_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByConditionWithBLOBs" parameterType="map" >
+    update milk
+    set id = #{record.id,jdbcType=BIGINT},
+      title_des = #{record.titleDes,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      commodity_id = #{record.commodityId,jdbcType=INTEGER},
+      price = #{record.price,jdbcType=DECIMAL},
+      weight = #{record.weight,jdbcType=DOUBLE},
+      address = #{record.address,jdbcType=VARCHAR},
+      milk_addr = #{record.milkAddr,jdbcType=VARCHAR},
+      Ischina = #{record.ischina,jdbcType=INTEGER},
+      age = #{record.age,jdbcType=VARCHAR},
+      packaging_unit = #{record.packagingUnit,jdbcType=VARCHAR},
+      formula = #{record.formula,jdbcType=VARCHAR},
+      catalog = #{record.catalog,jdbcType=INTEGER},
+      net_content = #{record.netContent,jdbcType=VARCHAR},
+      milk_section = #{record.milkSection,jdbcType=INTEGER},
+      comment_num = #{record.commentNum,jdbcType=VARCHAR},
+      prise_percentage = #{record.prisePercentage,jdbcType=VARCHAR},
+      middle_percentage = #{record.middlePercentage,jdbcType=VARCHAR},
+      bad_percentage = #{record.badPercentage,jdbcType=VARCHAR},
+      image_path = #{record.imagePath,jdbcType=VARCHAR},
+      impression = #{record.impression,jdbcType=LONGVARBINARY}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Condition_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByCondition" parameterType="map" >
+    update milk
+    set id = #{record.id,jdbcType=BIGINT},
+      title_des = #{record.titleDes,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      commodity_id = #{record.commodityId,jdbcType=INTEGER},
+      price = #{record.price,jdbcType=DECIMAL},
+      weight = #{record.weight,jdbcType=DOUBLE},
+      address = #{record.address,jdbcType=VARCHAR},
+      milk_addr = #{record.milkAddr,jdbcType=VARCHAR},
+      Ischina = #{record.ischina,jdbcType=INTEGER},
+      age = #{record.age,jdbcType=VARCHAR},
+      packaging_unit = #{record.packagingUnit,jdbcType=VARCHAR},
+      formula = #{record.formula,jdbcType=VARCHAR},
+      catalog = #{record.catalog,jdbcType=INTEGER},
+      net_content = #{record.netContent,jdbcType=VARCHAR},
+      milk_section = #{record.milkSection,jdbcType=INTEGER},
+      comment_num = #{record.commentNum,jdbcType=VARCHAR},
+      prise_percentage = #{record.prisePercentage,jdbcType=VARCHAR},
+      middle_percentage = #{record.middlePercentage,jdbcType=VARCHAR},
+      bad_percentage = #{record.badPercentage,jdbcType=VARCHAR},
+      image_path = #{record.imagePath,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Condition_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByIdSelective" parameterType="com.online.model.Milk" >
+    update milk
+    <set >
+      <if test="titleDes != null" >
+        title_des = #{titleDes,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityId != null" >
+        commodity_id = #{commodityId,jdbcType=INTEGER},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="weight != null" >
+        weight = #{weight,jdbcType=DOUBLE},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="milkAddr != null" >
+        milk_addr = #{milkAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="ischina != null" >
+        Ischina = #{ischina,jdbcType=INTEGER},
+      </if>
+      <if test="age != null" >
+        age = #{age,jdbcType=VARCHAR},
+      </if>
+      <if test="packagingUnit != null" >
+        packaging_unit = #{packagingUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="formula != null" >
+        formula = #{formula,jdbcType=VARCHAR},
+      </if>
+      <if test="catalog != null" >
+        catalog = #{catalog,jdbcType=INTEGER},
+      </if>
+      <if test="netContent != null" >
+        net_content = #{netContent,jdbcType=VARCHAR},
+      </if>
+      <if test="milkSection != null" >
+        milk_section = #{milkSection,jdbcType=INTEGER},
+      </if>
+      <if test="commentNum != null" >
+        comment_num = #{commentNum,jdbcType=VARCHAR},
+      </if>
+      <if test="prisePercentage != null" >
+        prise_percentage = #{prisePercentage,jdbcType=VARCHAR},
+      </if>
+      <if test="middlePercentage != null" >
+        middle_percentage = #{middlePercentage,jdbcType=VARCHAR},
+      </if>
+      <if test="badPercentage != null" >
+        bad_percentage = #{badPercentage,jdbcType=VARCHAR},
+      </if>
+      <if test="imagePath != null" >
+        image_path = #{imagePath,jdbcType=VARCHAR},
+      </if>
+      <if test="impression != null" >
+        impression = #{impression,jdbcType=LONGVARBINARY},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByIdWithBLOBs" parameterType="com.online.model.Milk" >
+    update milk
+    set title_des = #{titleDes,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      commodity_id = #{commodityId,jdbcType=INTEGER},
+      price = #{price,jdbcType=DECIMAL},
+      weight = #{weight,jdbcType=DOUBLE},
+      address = #{address,jdbcType=VARCHAR},
+      milk_addr = #{milkAddr,jdbcType=VARCHAR},
+      Ischina = #{ischina,jdbcType=INTEGER},
+      age = #{age,jdbcType=VARCHAR},
+      packaging_unit = #{packagingUnit,jdbcType=VARCHAR},
+      formula = #{formula,jdbcType=VARCHAR},
+      catalog = #{catalog,jdbcType=INTEGER},
+      net_content = #{netContent,jdbcType=VARCHAR},
+      milk_section = #{milkSection,jdbcType=INTEGER},
+      comment_num = #{commentNum,jdbcType=VARCHAR},
+      prise_percentage = #{prisePercentage,jdbcType=VARCHAR},
+      middle_percentage = #{middlePercentage,jdbcType=VARCHAR},
+      bad_percentage = #{badPercentage,jdbcType=VARCHAR},
+      image_path = #{imagePath,jdbcType=VARCHAR},
+      impression = #{impression,jdbcType=LONGVARBINARY}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateById" parameterType="com.online.model.Milk" >
+    update milk
+    set title_des = #{titleDes,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      commodity_id = #{commodityId,jdbcType=INTEGER},
+      price = #{price,jdbcType=DECIMAL},
+      weight = #{weight,jdbcType=DOUBLE},
+      address = #{address,jdbcType=VARCHAR},
+      milk_addr = #{milkAddr,jdbcType=VARCHAR},
+      Ischina = #{ischina,jdbcType=INTEGER},
+      age = #{age,jdbcType=VARCHAR},
+      packaging_unit = #{packagingUnit,jdbcType=VARCHAR},
+      formula = #{formula,jdbcType=VARCHAR},
+      catalog = #{catalog,jdbcType=INTEGER},
+      net_content = #{netContent,jdbcType=VARCHAR},
+      milk_section = #{milkSection,jdbcType=INTEGER},
+      comment_num = #{commentNum,jdbcType=VARCHAR},
+      prise_percentage = #{prisePercentage,jdbcType=VARCHAR},
+      middle_percentage = #{middlePercentage,jdbcType=VARCHAR},
+      bad_percentage = #{badPercentage,jdbcType=VARCHAR},
+      image_path = #{imagePath,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

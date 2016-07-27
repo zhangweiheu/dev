@@ -33,13 +33,6 @@ public class LoginController {
         return view;
     }
 
-    @NotNeedLogin
-    @RequestMapping(value = "/skip", method = RequestMethod.GET)
-    public ModelAndView skip() {
-        ModelAndView view = new ModelAndView();
-        view.setViewName("skip");
-        return view;
-    }
 
     @LoginRequired
     @RequestMapping(value = "/index", method = RequestMethod.GET)
