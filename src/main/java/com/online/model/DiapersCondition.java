@@ -1044,213 +1044,183 @@ public class DiapersCondition {
             return (Criteria) this;
         }
 
-        public Criteria andPrisePercentageIsNull() {
-            addCriterion("prise_percentage is null");
+        public Criteria andPriseNumIsNull() {
+            addCriterion("prise_num is null");
             return (Criteria) this;
         }
 
-        public Criteria andPrisePercentageIsNotNull() {
-            addCriterion("prise_percentage is not null");
+        public Criteria andPriseNumIsNotNull() {
+            addCriterion("prise_num is not null");
             return (Criteria) this;
         }
 
-        public Criteria andPrisePercentageEqualTo(String value) {
-            addCriterion("prise_percentage =", value, "prisePercentage");
+        public Criteria andPriseNumEqualTo(Long value) {
+            addCriterion("prise_num =", value, "priseNum");
             return (Criteria) this;
         }
 
-        public Criteria andPrisePercentageNotEqualTo(String value) {
-            addCriterion("prise_percentage <>", value, "prisePercentage");
+        public Criteria andPriseNumNotEqualTo(Long value) {
+            addCriterion("prise_num <>", value, "priseNum");
             return (Criteria) this;
         }
 
-        public Criteria andPrisePercentageGreaterThan(String value) {
-            addCriterion("prise_percentage >", value, "prisePercentage");
+        public Criteria andPriseNumGreaterThan(Long value) {
+            addCriterion("prise_num >", value, "priseNum");
             return (Criteria) this;
         }
 
-        public Criteria andPrisePercentageGreaterThanOrEqualTo(String value) {
-            addCriterion("prise_percentage >=", value, "prisePercentage");
+        public Criteria andPriseNumGreaterThanOrEqualTo(Long value) {
+            addCriterion("prise_num >=", value, "priseNum");
             return (Criteria) this;
         }
 
-        public Criteria andPrisePercentageLessThan(String value) {
-            addCriterion("prise_percentage <", value, "prisePercentage");
+        public Criteria andPriseNumLessThan(Long value) {
+            addCriterion("prise_num <", value, "priseNum");
             return (Criteria) this;
         }
 
-        public Criteria andPrisePercentageLessThanOrEqualTo(String value) {
-            addCriterion("prise_percentage <=", value, "prisePercentage");
+        public Criteria andPriseNumLessThanOrEqualTo(Long value) {
+            addCriterion("prise_num <=", value, "priseNum");
             return (Criteria) this;
         }
 
-        public Criteria andPrisePercentageLike(String value) {
-            addCriterion("prise_percentage like", value, "prisePercentage");
+        public Criteria andPriseNumIn(List<Long> values) {
+            addCriterion("prise_num in", values, "priseNum");
             return (Criteria) this;
         }
 
-        public Criteria andPrisePercentageNotLike(String value) {
-            addCriterion("prise_percentage not like", value, "prisePercentage");
+        public Criteria andPriseNumNotIn(List<Long> values) {
+            addCriterion("prise_num not in", values, "priseNum");
             return (Criteria) this;
         }
 
-        public Criteria andPrisePercentageIn(List<String> values) {
-            addCriterion("prise_percentage in", values, "prisePercentage");
+        public Criteria andPriseNumBetween(Long value1, Long value2) {
+            addCriterion("prise_num between", value1, value2, "priseNum");
             return (Criteria) this;
         }
 
-        public Criteria andPrisePercentageNotIn(List<String> values) {
-            addCriterion("prise_percentage not in", values, "prisePercentage");
+        public Criteria andPriseNumNotBetween(Long value1, Long value2) {
+            addCriterion("prise_num not between", value1, value2, "priseNum");
             return (Criteria) this;
         }
 
-        public Criteria andPrisePercentageBetween(String value1, String value2) {
-            addCriterion("prise_percentage between", value1, value2, "prisePercentage");
+        public Criteria andMiddleNumIsNull() {
+            addCriterion("middle_num is null");
             return (Criteria) this;
         }
 
-        public Criteria andPrisePercentageNotBetween(String value1, String value2) {
-            addCriterion("prise_percentage not between", value1, value2, "prisePercentage");
+        public Criteria andMiddleNumIsNotNull() {
+            addCriterion("middle_num is not null");
             return (Criteria) this;
         }
 
-        public Criteria andMiddlePercentageIsNull() {
-            addCriterion("middle_percentage is null");
+        public Criteria andMiddleNumEqualTo(Long value) {
+            addCriterion("middle_num =", value, "middleNum");
             return (Criteria) this;
         }
 
-        public Criteria andMiddlePercentageIsNotNull() {
-            addCriterion("middle_percentage is not null");
+        public Criteria andMiddleNumNotEqualTo(Long value) {
+            addCriterion("middle_num <>", value, "middleNum");
             return (Criteria) this;
         }
 
-        public Criteria andMiddlePercentageEqualTo(String value) {
-            addCriterion("middle_percentage =", value, "middlePercentage");
+        public Criteria andMiddleNumGreaterThan(Long value) {
+            addCriterion("middle_num >", value, "middleNum");
             return (Criteria) this;
         }
 
-        public Criteria andMiddlePercentageNotEqualTo(String value) {
-            addCriterion("middle_percentage <>", value, "middlePercentage");
+        public Criteria andMiddleNumGreaterThanOrEqualTo(Long value) {
+            addCriterion("middle_num >=", value, "middleNum");
             return (Criteria) this;
         }
 
-        public Criteria andMiddlePercentageGreaterThan(String value) {
-            addCriterion("middle_percentage >", value, "middlePercentage");
+        public Criteria andMiddleNumLessThan(Long value) {
+            addCriterion("middle_num <", value, "middleNum");
             return (Criteria) this;
         }
 
-        public Criteria andMiddlePercentageGreaterThanOrEqualTo(String value) {
-            addCriterion("middle_percentage >=", value, "middlePercentage");
+        public Criteria andMiddleNumLessThanOrEqualTo(Long value) {
+            addCriterion("middle_num <=", value, "middleNum");
             return (Criteria) this;
         }
 
-        public Criteria andMiddlePercentageLessThan(String value) {
-            addCriterion("middle_percentage <", value, "middlePercentage");
+        public Criteria andMiddleNumIn(List<Long> values) {
+            addCriterion("middle_num in", values, "middleNum");
             return (Criteria) this;
         }
 
-        public Criteria andMiddlePercentageLessThanOrEqualTo(String value) {
-            addCriterion("middle_percentage <=", value, "middlePercentage");
+        public Criteria andMiddleNumNotIn(List<Long> values) {
+            addCriterion("middle_num not in", values, "middleNum");
             return (Criteria) this;
         }
 
-        public Criteria andMiddlePercentageLike(String value) {
-            addCriterion("middle_percentage like", value, "middlePercentage");
+        public Criteria andMiddleNumBetween(Long value1, Long value2) {
+            addCriterion("middle_num between", value1, value2, "middleNum");
             return (Criteria) this;
         }
 
-        public Criteria andMiddlePercentageNotLike(String value) {
-            addCriterion("middle_percentage not like", value, "middlePercentage");
+        public Criteria andMiddleNumNotBetween(Long value1, Long value2) {
+            addCriterion("middle_num not between", value1, value2, "middleNum");
             return (Criteria) this;
         }
 
-        public Criteria andMiddlePercentageIn(List<String> values) {
-            addCriterion("middle_percentage in", values, "middlePercentage");
+        public Criteria andBadNumIsNull() {
+            addCriterion("bad_num is null");
             return (Criteria) this;
         }
 
-        public Criteria andMiddlePercentageNotIn(List<String> values) {
-            addCriterion("middle_percentage not in", values, "middlePercentage");
+        public Criteria andBadNumIsNotNull() {
+            addCriterion("bad_num is not null");
             return (Criteria) this;
         }
 
-        public Criteria andMiddlePercentageBetween(String value1, String value2) {
-            addCriterion("middle_percentage between", value1, value2, "middlePercentage");
+        public Criteria andBadNumEqualTo(Long value) {
+            addCriterion("bad_num =", value, "badNum");
             return (Criteria) this;
         }
 
-        public Criteria andMiddlePercentageNotBetween(String value1, String value2) {
-            addCriterion("middle_percentage not between", value1, value2, "middlePercentage");
+        public Criteria andBadNumNotEqualTo(Long value) {
+            addCriterion("bad_num <>", value, "badNum");
             return (Criteria) this;
         }
 
-        public Criteria andBadPercentageIsNull() {
-            addCriterion("bad_percentage is null");
+        public Criteria andBadNumGreaterThan(Long value) {
+            addCriterion("bad_num >", value, "badNum");
             return (Criteria) this;
         }
 
-        public Criteria andBadPercentageIsNotNull() {
-            addCriterion("bad_percentage is not null");
+        public Criteria andBadNumGreaterThanOrEqualTo(Long value) {
+            addCriterion("bad_num >=", value, "badNum");
             return (Criteria) this;
         }
 
-        public Criteria andBadPercentageEqualTo(String value) {
-            addCriterion("bad_percentage =", value, "badPercentage");
+        public Criteria andBadNumLessThan(Long value) {
+            addCriterion("bad_num <", value, "badNum");
             return (Criteria) this;
         }
 
-        public Criteria andBadPercentageNotEqualTo(String value) {
-            addCriterion("bad_percentage <>", value, "badPercentage");
+        public Criteria andBadNumLessThanOrEqualTo(Long value) {
+            addCriterion("bad_num <=", value, "badNum");
             return (Criteria) this;
         }
 
-        public Criteria andBadPercentageGreaterThan(String value) {
-            addCriterion("bad_percentage >", value, "badPercentage");
+        public Criteria andBadNumIn(List<Long> values) {
+            addCriterion("bad_num in", values, "badNum");
             return (Criteria) this;
         }
 
-        public Criteria andBadPercentageGreaterThanOrEqualTo(String value) {
-            addCriterion("bad_percentage >=", value, "badPercentage");
+        public Criteria andBadNumNotIn(List<Long> values) {
+            addCriterion("bad_num not in", values, "badNum");
             return (Criteria) this;
         }
 
-        public Criteria andBadPercentageLessThan(String value) {
-            addCriterion("bad_percentage <", value, "badPercentage");
+        public Criteria andBadNumBetween(Long value1, Long value2) {
+            addCriterion("bad_num between", value1, value2, "badNum");
             return (Criteria) this;
         }
 
-        public Criteria andBadPercentageLessThanOrEqualTo(String value) {
-            addCriterion("bad_percentage <=", value, "badPercentage");
-            return (Criteria) this;
-        }
-
-        public Criteria andBadPercentageLike(String value) {
-            addCriterion("bad_percentage like", value, "badPercentage");
-            return (Criteria) this;
-        }
-
-        public Criteria andBadPercentageNotLike(String value) {
-            addCriterion("bad_percentage not like", value, "badPercentage");
-            return (Criteria) this;
-        }
-
-        public Criteria andBadPercentageIn(List<String> values) {
-            addCriterion("bad_percentage in", values, "badPercentage");
-            return (Criteria) this;
-        }
-
-        public Criteria andBadPercentageNotIn(List<String> values) {
-            addCriterion("bad_percentage not in", values, "badPercentage");
-            return (Criteria) this;
-        }
-
-        public Criteria andBadPercentageBetween(String value1, String value2) {
-            addCriterion("bad_percentage between", value1, value2, "badPercentage");
-            return (Criteria) this;
-        }
-
-        public Criteria andBadPercentageNotBetween(String value1, String value2) {
-            addCriterion("bad_percentage not between", value1, value2, "badPercentage");
+        public Criteria andBadNumNotBetween(Long value1, Long value2) {
+            addCriterion("bad_num not between", value1, value2, "badNum");
             return (Criteria) this;
         }
 

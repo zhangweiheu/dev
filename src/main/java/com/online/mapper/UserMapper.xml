@@ -9,6 +9,7 @@
     <result column="status" property="status" jdbcType="BIT" />
     <result column="avatar" property="avatar" jdbcType="VARCHAR" />
     <result column="intro" property="intro" jdbcType="VARCHAR" />
+    <result column="level" property="level" jdbcType="VARCHAR" />
     <result column="email" property="email" jdbcType="VARCHAR" />
     <result column="phone" property="phone" jdbcType="VARCHAR" />
     <result column="wechat" property="wechat" jdbcType="VARCHAR" />
@@ -74,8 +75,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, username, password, type, status, avatar, intro, email, phone, wechat, create_at, 
-    update_at
+    id, username, password, type, status, avatar, intro, level, email, phone, wechat, 
+    create_at, update_at
   </sql>
   <select id="selectByCondition" resultMap="BaseResultMap" parameterType="com.online.model.UserCondition" >
     select
@@ -116,12 +117,14 @@
     </selectKey>
     insert into user (username, password, type, 
       status, avatar, intro, 
-      email, phone, wechat, 
-      create_at, update_at)
+      level, email, phone, 
+      wechat, create_at, update_at
+      )
     values (#{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{type,jdbcType=BIT}, 
       #{status,jdbcType=BIT}, #{avatar,jdbcType=VARCHAR}, #{intro,jdbcType=VARCHAR}, 
-      #{email,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{wechat,jdbcType=VARCHAR}, 
-      #{createAt,jdbcType=TIMESTAMP}, #{updateAt,jdbcType=TIMESTAMP})
+      #{level,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
+      #{wechat,jdbcType=VARCHAR}, #{createAt,jdbcType=TIMESTAMP}, #{updateAt,jdbcType=TIMESTAMP}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.online.model.User" >
     <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
@@ -146,6 +149,9 @@
       </if>
       <if test="intro != null" >
         intro,
+      </if>
+      <if test="level != null" >
+        level,
       </if>
       <if test="email != null" >
         email,
@@ -181,6 +187,9 @@
       </if>
       <if test="intro != null" >
         #{intro,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null" >
+        #{level,jdbcType=VARCHAR},
       </if>
       <if test="email != null" >
         #{email,jdbcType=VARCHAR},
@@ -229,6 +238,9 @@
       <if test="record.intro != null" >
         intro = #{record.intro,jdbcType=VARCHAR},
       </if>
+      <if test="record.level != null" >
+        level = #{record.level,jdbcType=VARCHAR},
+      </if>
       <if test="record.email != null" >
         email = #{record.email,jdbcType=VARCHAR},
       </if>
@@ -258,6 +270,7 @@
       status = #{record.status,jdbcType=BIT},
       avatar = #{record.avatar,jdbcType=VARCHAR},
       intro = #{record.intro,jdbcType=VARCHAR},
+      level = #{record.level,jdbcType=VARCHAR},
       email = #{record.email,jdbcType=VARCHAR},
       phone = #{record.phone,jdbcType=VARCHAR},
       wechat = #{record.wechat,jdbcType=VARCHAR},
@@ -288,6 +301,9 @@
       <if test="intro != null" >
         intro = #{intro,jdbcType=VARCHAR},
       </if>
+      <if test="level != null" >
+        level = #{level,jdbcType=VARCHAR},
+      </if>
       <if test="email != null" >
         email = #{email,jdbcType=VARCHAR},
       </if>
@@ -314,6 +330,7 @@
       status = #{status,jdbcType=BIT},
       avatar = #{avatar,jdbcType=VARCHAR},
       intro = #{intro,jdbcType=VARCHAR},
+      level = #{level,jdbcType=VARCHAR},
       email = #{email,jdbcType=VARCHAR},
       phone = #{phone,jdbcType=VARCHAR},
       wechat = #{wechat,jdbcType=VARCHAR},

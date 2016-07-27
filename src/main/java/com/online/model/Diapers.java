@@ -53,13 +53,13 @@ public class Diapers implements Serializable {
     private String commentNum;
 
     /**  */
-    private String prisePercentage;
+    private Long priseNum;
 
     /**  */
-    private String middlePercentage;
+    private Long middleNum;
 
     /**  */
-    private String badPercentage;
+    private Long badNum;
 
     /**  */
     private String imagePath;
@@ -181,28 +181,28 @@ public class Diapers implements Serializable {
         this.commentNum = commentNum == null ? null : commentNum.trim();
     }
 
-    public String getPrisePercentage() {
-        return prisePercentage;
+    public Long getPriseNum() {
+        return priseNum;
     }
 
-    public void setPrisePercentage(String prisePercentage) {
-        this.prisePercentage = prisePercentage == null ? null : prisePercentage.trim();
+    public void setPriseNum(Long priseNum) {
+        this.priseNum = priseNum;
     }
 
-    public String getMiddlePercentage() {
-        return middlePercentage;
+    public Long getMiddleNum() {
+        return middleNum;
     }
 
-    public void setMiddlePercentage(String middlePercentage) {
-        this.middlePercentage = middlePercentage == null ? null : middlePercentage.trim();
+    public void setMiddleNum(Long middleNum) {
+        this.middleNum = middleNum;
     }
 
-    public String getBadPercentage() {
-        return badPercentage;
+    public Long getBadNum() {
+        return badNum;
     }
 
-    public void setBadPercentage(String badPercentage) {
-        this.badPercentage = badPercentage == null ? null : badPercentage.trim();
+    public void setBadNum(Long badNum) {
+        this.badNum = badNum;
     }
 
     public String getImagePath() {

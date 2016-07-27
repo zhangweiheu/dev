@@ -1,6 +1,5 @@
 package com.online.controller;
 
-import com.online.annotation.LoginRequired;
 import com.online.annotation.NotNeedLogin;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,7 +20,7 @@ public class LoginController {
     @RequestMapping(value = "", method = RequestMethod.GET)
     public ModelAndView login() {
         ModelAndView view = new ModelAndView();
-        view.setViewName("login");
+        view.setViewName("index");
         return view;
     }
 
@@ -34,7 +33,7 @@ public class LoginController {
     }
 
 
-    @LoginRequired
+    @NotNeedLogin
     @RequestMapping(value = "/index", method = RequestMethod.GET)
     public ModelAndView index() {
         ModelAndView view = new ModelAndView();

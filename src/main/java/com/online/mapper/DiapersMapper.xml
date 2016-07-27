@@ -16,9 +16,9 @@
     <result column="packaging_unit" property="packagingUnit" jdbcType="VARCHAR" />
     <result column="catalog" property="catalog" jdbcType="INTEGER" />
     <result column="comment_num" property="commentNum" jdbcType="VARCHAR" />
-    <result column="prise_percentage" property="prisePercentage" jdbcType="VARCHAR" />
-    <result column="middle_percentage" property="middlePercentage" jdbcType="VARCHAR" />
-    <result column="bad_percentage" property="badPercentage" jdbcType="VARCHAR" />
+    <result column="prise_num" property="priseNum" jdbcType="BIGINT" />
+    <result column="middle_num" property="middleNum" jdbcType="BIGINT" />
+    <result column="bad_num" property="badNum" jdbcType="BIGINT" />
     <result column="image_path" property="imagePath" jdbcType="VARCHAR" />
   </resultMap>
   <resultMap id="ResultMapWithBLOBs" type="com.online.model.Diapers" extends="BaseResultMap" >
@@ -84,8 +84,7 @@
   </sql>
   <sql id="Base_Column_List" >
     id, title_des, name, commodity_id, price, weight, size, sex, address, Ischina, age, 
-    packaging_unit, catalog, comment_num, prise_percentage, middle_percentage, bad_percentage, 
-    image_path
+    packaging_unit, catalog, comment_num, prise_num, middle_num, bad_num, image_path
   </sql>
   <sql id="Blob_Column_List" >
     impression
@@ -152,15 +151,15 @@
       price, weight, size, 
       sex, address, Ischina, 
       age, packaging_unit, catalog, 
-      comment_num, prise_percentage, middle_percentage, 
-      bad_percentage, image_path, impression
+      comment_num, prise_num, middle_num, 
+      bad_num, image_path, impression
       )
     values (#{titleDes,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{commodityId,jdbcType=INTEGER}, 
       #{price,jdbcType=DECIMAL}, #{weight,jdbcType=DOUBLE}, #{size,jdbcType=VARCHAR}, 
       #{sex,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{ischina,jdbcType=INTEGER}, 
       #{age,jdbcType=VARCHAR}, #{packagingUnit,jdbcType=VARCHAR}, #{catalog,jdbcType=INTEGER}, 
-      #{commentNum,jdbcType=VARCHAR}, #{prisePercentage,jdbcType=VARCHAR}, #{middlePercentage,jdbcType=VARCHAR}, 
-      #{badPercentage,jdbcType=VARCHAR}, #{imagePath,jdbcType=VARCHAR}, #{impression,jdbcType=LONGVARBINARY}
+      #{commentNum,jdbcType=VARCHAR}, #{priseNum,jdbcType=BIGINT}, #{middleNum,jdbcType=BIGINT}, 
+      #{badNum,jdbcType=BIGINT}, #{imagePath,jdbcType=VARCHAR}, #{impression,jdbcType=LONGVARBINARY}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.online.model.Diapers" >
@@ -208,14 +207,14 @@
       <if test="commentNum != null" >
         comment_num,
       </if>
-      <if test="prisePercentage != null" >
-        prise_percentage,
+      <if test="priseNum != null" >
+        prise_num,
       </if>
-      <if test="middlePercentage != null" >
-        middle_percentage,
+      <if test="middleNum != null" >
+        middle_num,
       </if>
-      <if test="badPercentage != null" >
-        bad_percentage,
+      <if test="badNum != null" >
+        bad_num,
       </if>
       <if test="imagePath != null" >
         image_path,
@@ -264,14 +263,14 @@
       <if test="commentNum != null" >
         #{commentNum,jdbcType=VARCHAR},
       </if>
-      <if test="prisePercentage != null" >
-        #{prisePercentage,jdbcType=VARCHAR},
+      <if test="priseNum != null" >
+        #{priseNum,jdbcType=BIGINT},
       </if>
-      <if test="middlePercentage != null" >
-        #{middlePercentage,jdbcType=VARCHAR},
+      <if test="middleNum != null" >
+        #{middleNum,jdbcType=BIGINT},
       </if>
-      <if test="badPercentage != null" >
-        #{badPercentage,jdbcType=VARCHAR},
+      <if test="badNum != null" >
+        #{badNum,jdbcType=BIGINT},
       </if>
       <if test="imagePath != null" >
         #{imagePath,jdbcType=VARCHAR},
@@ -332,14 +331,14 @@
       <if test="record.commentNum != null" >
         comment_num = #{record.commentNum,jdbcType=VARCHAR},
       </if>
-      <if test="record.prisePercentage != null" >
-        prise_percentage = #{record.prisePercentage,jdbcType=VARCHAR},
+      <if test="record.priseNum != null" >
+        prise_num = #{record.priseNum,jdbcType=BIGINT},
       </if>
-      <if test="record.middlePercentage != null" >
-        middle_percentage = #{record.middlePercentage,jdbcType=VARCHAR},
+      <if test="record.middleNum != null" >
+        middle_num = #{record.middleNum,jdbcType=BIGINT},
       </if>
-      <if test="record.badPercentage != null" >
-        bad_percentage = #{record.badPercentage,jdbcType=VARCHAR},
+      <if test="record.badNum != null" >
+        bad_num = #{record.badNum,jdbcType=BIGINT},
       </if>
       <if test="record.imagePath != null" >
         image_path = #{record.imagePath,jdbcType=VARCHAR},
@@ -368,9 +367,9 @@
       packaging_unit = #{record.packagingUnit,jdbcType=VARCHAR},
       catalog = #{record.catalog,jdbcType=INTEGER},
       comment_num = #{record.commentNum,jdbcType=VARCHAR},
-      prise_percentage = #{record.prisePercentage,jdbcType=VARCHAR},
-      middle_percentage = #{record.middlePercentage,jdbcType=VARCHAR},
-      bad_percentage = #{record.badPercentage,jdbcType=VARCHAR},
+      prise_num = #{record.priseNum,jdbcType=BIGINT},
+      middle_num = #{record.middleNum,jdbcType=BIGINT},
+      bad_num = #{record.badNum,jdbcType=BIGINT},
       image_path = #{record.imagePath,jdbcType=VARCHAR},
       impression = #{record.impression,jdbcType=LONGVARBINARY}
     <if test="_parameter != null" >
@@ -393,9 +392,9 @@
       packaging_unit = #{record.packagingUnit,jdbcType=VARCHAR},
       catalog = #{record.catalog,jdbcType=INTEGER},
       comment_num = #{record.commentNum,jdbcType=VARCHAR},
-      prise_percentage = #{record.prisePercentage,jdbcType=VARCHAR},
-      middle_percentage = #{record.middlePercentage,jdbcType=VARCHAR},
-      bad_percentage = #{record.badPercentage,jdbcType=VARCHAR},
+      prise_num = #{record.priseNum,jdbcType=BIGINT},
+      middle_num = #{record.middleNum,jdbcType=BIGINT},
+      bad_num = #{record.badNum,jdbcType=BIGINT},
       image_path = #{record.imagePath,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Condition_Where_Clause" />
@@ -443,14 +442,14 @@
       <if test="commentNum != null" >
         comment_num = #{commentNum,jdbcType=VARCHAR},
       </if>
-      <if test="prisePercentage != null" >
-        prise_percentage = #{prisePercentage,jdbcType=VARCHAR},
+      <if test="priseNum != null" >
+        prise_num = #{priseNum,jdbcType=BIGINT},
       </if>
-      <if test="middlePercentage != null" >
-        middle_percentage = #{middlePercentage,jdbcType=VARCHAR},
+      <if test="middleNum != null" >
+        middle_num = #{middleNum,jdbcType=BIGINT},
       </if>
-      <if test="badPercentage != null" >
-        bad_percentage = #{badPercentage,jdbcType=VARCHAR},
+      <if test="badNum != null" >
+        bad_num = #{badNum,jdbcType=BIGINT},
       </if>
       <if test="imagePath != null" >
         image_path = #{imagePath,jdbcType=VARCHAR},
@@ -476,9 +475,9 @@
       packaging_unit = #{packagingUnit,jdbcType=VARCHAR},
       catalog = #{catalog,jdbcType=INTEGER},
       comment_num = #{commentNum,jdbcType=VARCHAR},
-      prise_percentage = #{prisePercentage,jdbcType=VARCHAR},
-      middle_percentage = #{middlePercentage,jdbcType=VARCHAR},
-      bad_percentage = #{badPercentage,jdbcType=VARCHAR},
+      prise_num = #{priseNum,jdbcType=BIGINT},
+      middle_num = #{middleNum,jdbcType=BIGINT},
+      bad_num = #{badNum,jdbcType=BIGINT},
       image_path = #{imagePath,jdbcType=VARCHAR},
       impression = #{impression,jdbcType=LONGVARBINARY}
     where id = #{id,jdbcType=BIGINT}
@@ -498,9 +497,9 @@
       packaging_unit = #{packagingUnit,jdbcType=VARCHAR},
       catalog = #{catalog,jdbcType=INTEGER},
       comment_num = #{commentNum,jdbcType=VARCHAR},
-      prise_percentage = #{prisePercentage,jdbcType=VARCHAR},
-      middle_percentage = #{middlePercentage,jdbcType=VARCHAR},
-      bad_percentage = #{badPercentage,jdbcType=VARCHAR},
+      prise_num = #{priseNum,jdbcType=BIGINT},
+      middle_num = #{middleNum,jdbcType=BIGINT},
+      bad_num = #{badNum,jdbcType=BIGINT},
       image_path = #{imagePath,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>

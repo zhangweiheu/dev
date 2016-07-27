@@ -26,7 +26,7 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 @Configuration
 @EnableAutoConfiguration
 @Import({CoreProperties.class, RedisConfiguration.class, MyBatisConfiguration.class})
-@ComponentScan(basePackageClasses = {com.online.dao.Pkg.class, com.online.service.Pkg.class})
+@ComponentScan(basePackageClasses = {com.online.dao.Pkg.class, com.online.service.Pkg.class,com.online.controller.Pkg.class})
 public class WebappConfiguration extends AbstractWebMvcConfiguration {
 
     @Configuration

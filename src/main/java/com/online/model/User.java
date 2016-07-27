@@ -34,6 +34,9 @@ public class User implements Serializable {
     /** 简介 */
     private String intro;
 
+    /** 等级 */
+    private String level;
+
     /** 邮箱 */
     private String email;
 
@@ -105,6 +108,14 @@ public class User implements Serializable {
 
     public void setIntro(String intro) {
         this.intro = intro == null ? null : intro.trim();
+    }
+
+    public String getLevel() {
+        return level;
+    }
+
+    public void setLevel(String level) {
+        this.level = level == null ? null : level.trim();
     }
 
     public String getEmail() {
