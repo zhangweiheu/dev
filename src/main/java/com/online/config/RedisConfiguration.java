@@ -22,21 +22,20 @@ public class RedisConfiguration {
 
     @Bean
     public JedisConnectionFactory jedisConnectionFactory() {
-        CoreProperties prop = coreProperties;
 
         JedisPoolConfig jedisPoolConfig = new JedisPoolConfig();
-        jedisPoolConfig.setMaxIdle(prop.getRedisMaxIdle()); // <!--最小空闲连接数 -->
-        jedisPoolConfig.setMaxTotal(prop.getRedisMaxTotal()); // <!--最大连接数 -->
-        jedisPoolConfig.setMaxWaitMillis(prop.getRedisMaxWaitMillis()); // <!-- 获取连接时的最大等待毫秒数 -->
-        jedisPoolConfig.setTestOnBorrow(prop.isRedisTestOnBorrow()); // <!-- 在获取连接的时候检查有效性, 默认false -->
+        jedisPoolConfig.setMaxIdle(coreProperties.getRedisMaxIdle()); // <!--最小空闲连接数 -->
+        jedisPoolConfig.setMaxTotal(coreProperties.getRedisMaxTotal()); // <!--最大连接数 -->
+        jedisPoolConfig.setMaxWaitMillis(coreProperties.getRedisMaxWaitMillis()); // <!-- 获取连接时的最大等待毫秒数 -->
+        jedisPoolConfig.setTestOnBorrow(coreProperties.isRedisTestOnBorrow()); // <!-- 在获取连接的时候检查有效性, 默认false -->
 
         JedisConnectionFactory connectionFactory = new JedisConnectionFactory(jedisPoolConfig);
-        connectionFactory.setHostName(prop.getRedisHostName());
-        connectionFactory.setPort(prop.getRedisHostPort());
+        connectionFactory.setHostName(coreProperties.getRedisHostName());
+        connectionFactory.setPort(coreProperties.getRedisHostPort());
         connectionFactory.setUsePool(true);
-        connectionFactory.setTimeout(prop.getRedisTimeout());
-        connectionFactory.setPassword(prop.getRedisPassword());
-        connectionFactory.setDatabase(prop.getRedisCacheDatabase());
+        connectionFactory.setTimeout(coreProperties.getRedisTimeout());
+        connectionFactory.setPassword(coreProperties.getRedisPassword());
+        connectionFactory.setDatabase(coreProperties.getRedisCacheDatabase());
         return connectionFactory;
     }
 

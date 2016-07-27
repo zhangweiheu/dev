@@ -39,7 +39,7 @@ public class CoreProperties {
     private int redisTimeout;
     @Value("${spring.redis.testOnBorrow}")
     private boolean redisTestOnBorrow;
-    @Value("${spring.redis.database}")
+    @Value("${spring.redis.database:0}")
     private int redisCacheDatabase;
 
     public String getJdbcUrl() {
